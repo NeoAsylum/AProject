@@ -3,6 +3,9 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import execution.Main;
+
 import javax.swing.JButton;
 import java.awt.Component;
 import java.awt.Container;
@@ -21,7 +24,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  * @author Hallooo
  */
 @SuppressWarnings("serial")
-public class EinFrame extends JFrame {
+public class EinFrame extends JFrame implements Runnable {
 
   /**
    * The content Pane.
@@ -34,14 +37,13 @@ public class EinFrame extends JFrame {
    */
   Font myFont;
 
-  //JFrame Components
+  // JFrame Components
   JButton newGameButton = new JButton("NEW GAME");
   JButton optionsButton = new JButton("OPTIONS");
   JButton creditsButton = new JButton("CREDITS");
   JButton levelSelectionButton = new JButton("LEVEL SELECTION");
   JLabel spielTitelLabel = new JLabel("Spieltitel");
 
-  
   /**
    * Create the frame.
    */
@@ -107,17 +109,18 @@ public class EinFrame extends JFrame {
     // Set Font
     myFont = new Font("SansSerif", Font.BOLD, 18);
     changeFont(contentPane, myFont);
+    addActionListeners();
   }
-  
+
   /**
    * Method to display actual game.
    */
   public void paintTheGame() {
-    
+    System.out.println("painted");
   }
 
   public void addActionListeners() {
-    newGameButton.addActionListener(null);
+    newGameButton.addActionListener(e -> Main.runGame());
   }
 
   /**
@@ -132,6 +135,16 @@ public class EinFrame extends JFrame {
       for (Component child : ((Container) component).getComponents()) {
         changeFont(child, font);
       }
+    }
+  }
+
+  /**
+   * 
+   */
+  @Override
+  public void run() {
+    while (Main.getRunning()) {
+      repaint();
     }
   }
 }

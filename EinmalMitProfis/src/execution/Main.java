@@ -3,6 +3,7 @@ package execution;
 import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -14,23 +15,13 @@ import gui.EinFrame;
  * @author Adrian
  *
  */
-public class Main implements Runnable {
+public class Main {
   /**
    * Thread for the Game.
    */
-  EinFrame frame;
-  static Logger log;
-  Thread gameThread;
-  boolean running = false;
-  static Main gameInstance;
-
-  /**
-   * Default constructor.
-   */
-  public Main() {
-    gameStart();
-    startThread();
-  }
+  private static EinFrame frame;
+  private static Logger log;
+  private static boolean running = false;
 
   /**
    * Main method.
@@ -40,26 +31,23 @@ public class Main implements Runnable {
   public static void main(String[] args) {
     log = Logger.getLogger(Main.class.getName());
     addFileHandlerToLogger();
-    gameInstance = new Main();
-    gameInstance.gameStart();
+    gameStart();
+
   }
 
   /**
    * Method to add Filehandler to Logger.
    */
-  public static void addFileHandlerToLogger() {
+  private static void addFileHandlerToLogger() {
     FileHandler fh = null;
     try {
       fh = new FileHandler("src/logging/filehandler.log", 50, 5);
     } catch (SecurityException e) {
       System.out.println("Logger wurde nicht erstellt");
-      // TODO Automatisch generierter Erfassungsblock
-      e.printStackTrace();
+      log.log(Level.SEVERE, "SecurityException in addFileHandler()", e);
     } catch (IOException e) {
       System.out.println("Logger wurde nicht erstellt");
-
-      // TODO Automatisch generierter Erfassungsblock
-      e.printStackTrace();
+      log.log(Level.SEVERE, "IOException in addFileHandler()", e);
     }
     SimpleFormatter form = new SimpleFormatter();
     fh.setFormatter(form);
@@ -70,48 +58,47 @@ public class Main implements Runnable {
   /**
    * Method to start game.
    */
-  public void gameStart() {
+  private static void gameStart() {
     try {
       frame = new EinFrame();
       frame.setVisible(true);
     } catch (Exception e) {
       e.printStackTrace();
     }
-
-    gameThread = new Thread(gameInstance);
-    gameThread.start();
   }
 
   /**
    * Method to start Thread(again).
    */
-  public void startThread() {
+  public static void runGame() {
     running = true;
-    run();
+    running();
   }
 
   /**
    * Method stops thread from running.
    */
-  public void stopThread() {
+  public static void stopRunningGame() {
     running = false;
   }
 
   /**
    * Running method.
    */
-  @Override
-  public void run() {
+  private static void running() {
     while (running) {
-
       frame.paintTheGame();
       log.info("huhu");
       try {
-        Thread.sleep(1000);
+        Thread.sleep(50);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
       System.out.println("is running");
     }
+  }
+  
+  public static boolean getRunning() {
+    return running;
   }
 }
