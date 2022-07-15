@@ -108,8 +108,16 @@ public class EinFrame extends JFrame {
     myFont = new Font("SansSerif", Font.BOLD, 18);
     changeFont(contentPane, myFont);
   }
+  
+  /**
+   * Method to display actual game.
+   */
+  public void paintTheGame() {
+    
+  }
 
   public void addActionListeners() {
+    newGameButton.addActionListener(null);
   }
 
   /**
