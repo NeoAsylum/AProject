@@ -77,7 +77,7 @@ public class Player implements Person {
 		}
 		// If speed is zero and the player has touched the floor it can jump.
 		if (w) {
-			if (yspeed == 0 && !jumped) {
+			if (yspeed == 0 && standing) {
 				jumped = true;
 				yspeed = -5;
 			}
