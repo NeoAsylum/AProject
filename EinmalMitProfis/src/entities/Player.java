@@ -1,36 +1,40 @@
 package entities;
 
 import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 
 public class Player implements Person {
 	private int xcoord;
 	private int ycoord;
-	private int xspeed;
-	private int yspeed;
-	private Polygon polygon;
+	private double xspeed;
+	private double yspeed;
+	private int height;
+	private int width;
+	private boolean jumped = true;
+	private Rectangle2D rectangle;
 
 	public Player() {
-		xcoord = 0;
-		ycoord = 0;
+		xcoord = 20;
+		ycoord = 20;
 		xspeed = 1;
 		yspeed = 1;
-		polygon = new Polygon();
-		polygon.addPoint(xcoord, ycoord);
-		polygon.addPoint(xcoord + 15, ycoord);
-		polygon.addPoint(xcoord + 15, ycoord + 30);
-		polygon.addPoint(xcoord, ycoord + 30);
+		width = 15;
+		height = 30;
+		rectangle = new Rectangle(xcoord, ycoord, width, height);
+
 	}
 
 	@Override
 	public int getXSpeed() {
 
-		return xspeed;
+		return (int)xspeed;
 	}
 
 	@Override
 	public int getYSpeed() {
 
-		return yspeed;
+		return (int)yspeed;
 	}
 
 	@Override
@@ -48,26 +52,48 @@ public class Player implements Person {
 	public void move(boolean a, boolean s, boolean d, boolean w) {
 		if (a) {
 			xcoord -= xspeed;
-			polygon.translate(-xspeed, 0);
+
 		}
 		if (d) {
 			xcoord += xspeed;
-			polygon.translate(xspeed, 0);
-
 		}
 		if (w) {
-			ycoord -= yspeed;
-			polygon.translate(0, -yspeed);
-
+			if(yspeed==0&&!jumped) {
+				jumped=true;
+				yspeed=-5;
+			}
 		}
 		if (s) {
-			polygon.translate(0, yspeed);
-
-			ycoord += yspeed;
+			yspeed += 1;
 		}
+		ycoord += yspeed;
+		if(yspeed<5) {
+			yspeed+=0.1;
+
+		}
+		rectangle = new Rectangle(xcoord, ycoord, 15, 30);
+		System.out.println("Xcood: "+xcoord+", Ycoord" + ycoord);
 	}
 
-	public Polygon getPolygon() {
-		return polygon;
+	public Rectangle2D getRectangle() {
+		return rectangle;
 	}
+
+	public void setYCoord(int temp) {
+		ycoord = temp;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void resetYSpeed() {
+		jumped=false;
+		yspeed = 0;
+	}
+
 }
