@@ -2,6 +2,8 @@ package gui;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import execution.Main;
 import useful.KeyHandler;
 import java.awt.Dimension;
 
@@ -15,9 +17,7 @@ public class EinFrame extends JFrame {
   /**
    * The backup Pane.
    */
-  private int height = 400;
-  private int width = 800;
-  public Dimension dimension = new Dimension(width, height);
+  public Dimension dimension = new Dimension(Main.width, Main.height);
 
   /**
    * Create the frame.

@@ -20,6 +20,9 @@ public class Main {
    */
   private static EinFrame frame;
   private static Logger log;
+  
+  public final static int width=400;
+  public final static int height=600;
 
   /**
    * Main method.
@@ -64,6 +67,10 @@ public class Main {
     }
   }
 
+  /**
+   * Get the logger.
+   * @return Logger.
+   */
   public static Logger getLogger() {
     return log;
   }
