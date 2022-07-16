@@ -20,7 +20,6 @@ public class Main {
    */
   private static EinFrame frame;
   private static Logger log;
-  private static boolean running = false;
 
   /**
    * Main method.
@@ -63,24 +62,6 @@ public class Main {
     } catch (Exception e) {
       e.printStackTrace();
     }
-  }
-
-  /**
-   * Method to start Thread(again).
-   */
-  public static void runGame() {
-    running = true;
-  }
-
-  /**
-   * Method stops thread from running.
-   */
-  public static void stopRunningGame() {
-    running = false;
-  }
-
-  public static boolean getRunning() {
-    return running;
   }
 
   public static Logger getLogger() {
