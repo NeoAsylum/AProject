@@ -4,16 +4,7 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
-public class Player implements Person {
-	private int xcoord;
-	private int ycoord;
-	private double xspeed;
-	private double yspeed;
-	private int height;
-	private int width;
-	private boolean jumped = true;
-	private Rectangle2D rectangle;
-	boolean standing;
+public class Player extends PlayerAbstract implements Person {
 
 	/**
 	 * Standart constructor.
@@ -27,42 +18,6 @@ public class Player implements Person {
 		height = 30;
 		rectangle = new Rectangle(xcoord, ycoord, width, height);
 		standing = false;
-	}
-
-	/**
-	 * Getter for x-speed.
-	 */
-	@Override
-	public int getXSpeed() {
-
-		return (int) xspeed;
-	}
-
-	/**
-	 * Getter for y-speed.
-	 */
-	@Override
-	public int getYSpeed() {
-
-		return (int) yspeed;
-	}
-
-	/**
-	 * Getter for xcoord.
-	 */
-	@Override
-	public int getXCoord() {
-
-		return xcoord;
-	}
-
-	/**
-	 * Getter for ycoord.
-	 */
-	@Override
-	public int getYCoord() {
-
-		return ycoord;
 	}
 
 	/**
@@ -98,49 +53,6 @@ public class Player implements Person {
 		System.out.println("Xcood: " + xcoord + ", Ycoord" + ycoord);
 		// standing has to be set to true each frame for it to be valid.
 		standing = false;
-	}
-
-	/**
-	 * Return the rectangle of his body.
-	 * 
-	 * @return Returns the rectangle.
-	 */
-	public Rectangle2D getRectangle() {
-		return rectangle;
-	}
-
-	/**
-	 * Set the ycoord.
-	 * 
-	 * @param temp The future ycoord.
-	 */
-	public void setYCoord(int temp) {
-		ycoord = temp;
-	}
-
-	/**
-	 * Get the width.
-	 * 
-	 * @return Player width.
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * Get the height.
-	 * @return Player height.
-	 */
-	public int getHeight() {
-		return height;
-	}
-
-	/**
-	 * Reset the player speed.
-	 */
-	public void resetYSpeed() {
-		standing = true;
-		yspeed = 0;
 	}
 
 }
