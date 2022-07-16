@@ -109,6 +109,5 @@ public class MenuPane extends JPanel {
     }
   }
   public void addActionListeners() {
-    newGameButton.addActionListener(e -> Main.runGame());
   }
 }

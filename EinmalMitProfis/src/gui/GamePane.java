@@ -10,10 +10,24 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.logging.Level;
 
+/**
+ * Class for Game-Panel.
+ * @author AdrianPlaasLink
+ *
+ */
 @SuppressWarnings("serial")
 public class GamePane extends JPanel implements Runnable {
+	/**
+	 * Game Thread.
+	 */
   private Thread gameThread;
+  /**
+   * Keyhandler.
+   */
   private KeyHandler keyHandler= new KeyHandler();
+  /**
+   * FPS.
+   */
   static final int FPS = 120;
   int x = 50, y = 50;
 
@@ -30,11 +44,19 @@ public class GamePane extends JPanel implements Runnable {
     startThread();
   }
 
+  
+  /**
+   * Method to start thread.
+   */
   public void startThread() {
     gameThread = new Thread(this);
     gameThread.start();
   }
 
+  
+  /**
+   * Update locations method.
+   */
   public void update() {
     if (keyHandler.upPressed) {
       y -= 1;
@@ -50,6 +72,9 @@ public class GamePane extends JPanel implements Runnable {
     }
   }
 
+  /**
+   * Paint Component method.
+   */
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
@@ -58,6 +83,10 @@ public class GamePane extends JPanel implements Runnable {
     g2.dispose();
   }
 
+  /**
+   * Method draws and updates the game a certain times per second.
+   * Method run for Running interface/Thread.
+   */
   @Override
   public void run() {
 

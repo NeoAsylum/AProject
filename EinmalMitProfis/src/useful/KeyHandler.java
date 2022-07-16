@@ -3,7 +3,15 @@ package useful;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Class for Key Listener.
+ * @author AdrianPlaasLink
+ *
+ */
 public class KeyHandler implements KeyListener {
+	/**
+	 * Booleans for directions w,a,s,d.
+	 */
   public boolean upPressed, downPressed, leftPressed, rightPressed;
 
   @Override
@@ -12,6 +20,9 @@ public class KeyHandler implements KeyListener {
 
   }
 
+  /**
+   * Key Pressed method.
+   */
   @Override
   public void keyPressed(KeyEvent e) {
     int code = e.getKeyCode();
@@ -31,6 +42,9 @@ public class KeyHandler implements KeyListener {
     }
   }
 
+  /**
+   * Key released method.
+   */
   @Override
   public void keyReleased(KeyEvent e) {
     int code = e.getKeyCode();
@@ -47,7 +61,6 @@ public class KeyHandler implements KeyListener {
     case KeyEvent.VK_D:
       rightPressed = false;
       break;
-
     }
   }
 
