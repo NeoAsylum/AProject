@@ -1,8 +1,10 @@
 package gamelogic;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import entities.Boulder;
+import execution.Main;
 
 public class BoulderRain {
   private ArrayList<Boulder> boulders;
@@ -25,9 +27,22 @@ public class BoulderRain {
         distance = distanceNew;
         index = boulders.indexOf(e);
       }
+
     }
     boulderSpawning();
     return index;
+  }
+
+  public void deleteBoulder() {
+    LinkedList<Integer> toDelete = new LinkedList<Integer>();
+    for (Boulder b : boulders) {
+      if (b.getRectangle().getMinY() > Main.height) {
+        toDelete.add(boulders.indexOf(b));
+      }
+    }
+    for (Integer i : toDelete) {
+      boulders.remove(i);
+    }
   }
 
   private void boulderSpawning() {
@@ -35,7 +50,6 @@ public class BoulderRain {
     if (intervallCounter >= boulderIntervall) {
       intervallCounter = 0;
       boulders.add(new Boulder());
-
     }
   }
 

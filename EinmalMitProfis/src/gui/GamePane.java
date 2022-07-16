@@ -33,7 +33,7 @@ public class GamePane extends JPanel implements Runnable {
   /**
    * FPS.
    */
-  static final int FPS = 120;
+  static final int FPS = 640;
   /**
    * Player entity.
    */
@@ -71,17 +71,25 @@ public class GamePane extends JPanel implements Runnable {
   }
 
   public boolean intersection() {
+    boolean intersects = false;
     if (player.getRectangle().intersects(floor.getRectangle())) {
-      return true;
+      intersects = true;
     }
     int closestBoulder = br.findClosestIndex(player.getXCoord() + player.getWidth() / 2,
-        player.getYCoord() + player.getYCoord() / 2);
+        player.getYCoord() + player.getHeight() / 2);
+    br.getBoulders().get(closestBoulder).setColor(Color.pink);
     if (closestBoulder != -1) {
       if (br.getBoulders().get(closestBoulder).getRectangle().intersects(player.getRectangle())) {
         System.out.println("weee");
+        intersects = true;
       }
     }
-    return false;
+
+    return intersects;
+  }
+
+  public void cleanupStuff() {
+    br.deleteBoulder();
   }
 
   /**
@@ -91,7 +99,6 @@ public class GamePane extends JPanel implements Runnable {
     player.move(keyHandler.leftPressed, keyHandler.downPressed, keyHandler.rightPressed,
         keyHandler.upPressed);
     if (intersection()) {
-      player.setYCoord((int) floor.getRectangle().getMinY() - player.getHeight());
       player.resetYSpeed();
     }
     for (Boulder b : br.getBoulders()) {
@@ -107,11 +114,11 @@ public class GamePane extends JPanel implements Runnable {
     Graphics2D g2 = (Graphics2D) g;
     g2.setColor(Color.white);
     for (Boulder b : br.getBoulders()) {
+      g2.setColor(b.getColor());
       g2.fill(b.getRectangle());
     }
     g2.fill(player.getRectangle());
     g2.fill(floor.getRectangle());
-    g2.fillRect(x, y, 40, 20);
     g2.dispose();
   }
 
@@ -130,6 +137,7 @@ public class GamePane extends JPanel implements Runnable {
     while (gameThread != null) {
       requestFocus();
       update();
+      cleanupStuff();
       repaint();
       drawCount++;
       timer += nextDrawTime - System.nanoTime();

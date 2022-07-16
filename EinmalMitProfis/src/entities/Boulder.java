@@ -1,12 +1,14 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 
 import execution.Main;
 
 public class Boulder extends MovingObjectAbstract {
   public final static int MAXWIDTH = 50;
-  public final static int MAXHEIGHT = 20;
+  public final static int MAXHEIGHT = 30;
+  Color color = Color.blue;
 
   public Boulder(int xcoord, int ycoord, double xspeed, double yspeed, double widthfactor,
       double heightfactor) {
@@ -24,18 +26,27 @@ public class Boulder extends MovingObjectAbstract {
   }
 
   public Boulder() {
-    width = (int) (Math.random() * MAXWIDTH);
-    height = (int) ((Math.random() * MAXHEIGHT));
+    width = (int) ((Math.random() + 0.2) * MAXWIDTH);
+    height = (int) (((Math.random() + 0.2) * MAXHEIGHT));
     xcoord = (int) (Math.random() * (Main.width - width));
     ycoord = 0;
-    xspeed=0;
-    yspeed=1;
+    xspeed = 0;
+    yspeed = 1;
     rectangle = new Rectangle(xcoord, ycoord, width, height);
-    System.out.println("width:"+width+"height:"+height+"xcoord:"+xcoord+"ycoord:"+ycoord);
+    System.out
+        .println("width:" + width + "height:" + height + "xcoord:" + xcoord + "ycoord:" + ycoord);
   }
 
   public void fall() {
     ycoord += yspeed;
     rectangle = new Rectangle(xcoord, ycoord, width, height);
+  }
+
+  public Color getColor() {
+    return color;
+  }
+  
+  public void setColor(Color color) {
+    this.color=color;
   }
 }
