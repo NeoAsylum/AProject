@@ -89,7 +89,6 @@ public class GamePane extends JPanel implements Runnable {
    */
   @Override
   public void run() {
-
     // Sleep Time
     double drawInterval = 1000000000 / FPS;
     double nextDrawTime = System.nanoTime() + drawInterval;
