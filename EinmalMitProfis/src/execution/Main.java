@@ -67,6 +67,10 @@ public class Main {
     }
   }
 
+  /**
+   * Get the logger.
+   * @return Logger.
+   */
   public static Logger getLogger() {
     return log;
   }

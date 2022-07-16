@@ -13,7 +13,11 @@ public class Player implements Person {
 	private int width;
 	private boolean jumped = true;
 	private Rectangle2D rectangle;
+	boolean standing;
 
+	/**
+	 * Standart constructor.
+	 */
 	public Player() {
 		xcoord = 20;
 		ycoord = 20;
@@ -22,77 +26,120 @@ public class Player implements Person {
 		width = 15;
 		height = 30;
 		rectangle = new Rectangle(xcoord, ycoord, width, height);
-
+		standing = false;
 	}
 
+	/**
+	 * Getter for x-speed.
+	 */
 	@Override
 	public int getXSpeed() {
 
-		return (int)xspeed;
+		return (int) xspeed;
 	}
 
+	/**
+	 * Getter for y-speed.
+	 */
 	@Override
 	public int getYSpeed() {
 
-		return (int)yspeed;
+		return (int) yspeed;
 	}
 
+	/**
+	 * Getter for xcoord.
+	 */
 	@Override
 	public int getXCoord() {
 
 		return xcoord;
 	}
 
+	/**
+	 * Getter for ycoord.
+	 */
 	@Override
 	public int getYCoord() {
 
 		return ycoord;
 	}
 
+	/**
+	 * Method moves player based on boolean input.
+	 */
 	public void move(boolean a, boolean s, boolean d, boolean w) {
 		if (a) {
 			xcoord -= xspeed;
-
 		}
 		if (d) {
 			xcoord += xspeed;
 		}
+		// If speed is zero and the player has touched the floor it can jump.
 		if (w) {
-			if(yspeed==0&&!jumped) {
-				jumped=true;
-				yspeed=-5;
+			if (yspeed == 0 && !jumped) {
+				jumped = true;
+				yspeed = -5;
 			}
 		}
+		// Speed up player fall cus of physics.
 		if (s) {
 			yspeed += 1;
 		}
+		// yspeed is added.
 		ycoord += yspeed;
-		if(yspeed<5) {
-			yspeed+=0.1;
+		// Player speeds up to allowed speedlimit. (about 400 km/h for a human body)
+		if (yspeed < 5) {
+			// Gravity
+			yspeed += 0.1;
 
 		}
 		rectangle = new Rectangle(xcoord, ycoord, 15, 30);
-		System.out.println("Xcood: "+xcoord+", Ycoord" + ycoord);
+		System.out.println("Xcood: " + xcoord + ", Ycoord" + ycoord);
+		// standing has to be set to true each frame for it to be valid.
+		standing = false;
 	}
 
+	/**
+	 * Return the rectangle of his body.
+	 * 
+	 * @return Returns the rectangle.
+	 */
 	public Rectangle2D getRectangle() {
 		return rectangle;
 	}
 
+	/**
+	 * Set the ycoord.
+	 * 
+	 * @param temp The future ycoord.
+	 */
 	public void setYCoord(int temp) {
 		ycoord = temp;
 	}
 
+	/**
+	 * Get the width.
+	 * 
+	 * @return Player width.
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * Get the height.
+	 * @return Player height.
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * Reset the player speed.
+	 */
 	public void resetYSpeed() {
-		jumped=false;
+		standing = true;
 		yspeed = 0;
 	}
 
