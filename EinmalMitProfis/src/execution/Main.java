@@ -1,6 +1,5 @@
 package execution;
 
-import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -31,8 +30,7 @@ public class Main {
   public static void main(String[] args) {
     log = Logger.getLogger(Main.class.getName());
     addFileHandlerToLogger();
-    gameStart();
-
+    setupFrame();
   }
 
   /**
@@ -58,7 +56,7 @@ public class Main {
   /**
    * Method to start game.
    */
-  private static void gameStart() {
+  private static void setupFrame() {
     try {
       frame = new EinFrame();
       frame.setVisible(true);
@@ -72,7 +70,6 @@ public class Main {
    */
   public static void runGame() {
     running = true;
-    running();
   }
 
   /**
@@ -82,23 +79,11 @@ public class Main {
     running = false;
   }
 
-  /**
-   * Running method.
-   */
-  private static void running() {
-    while (running) {
-      frame.paintTheGame();
-      log.info("huhu");
-      try {
-        Thread.sleep(50);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-      System.out.println("is running");
-    }
-  }
-  
   public static boolean getRunning() {
     return running;
+  }
+
+  public static Logger getLogger() {
+    return log;
   }
 }
