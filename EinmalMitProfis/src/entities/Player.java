@@ -1,9 +1,13 @@
 package entities;
 
-import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
 
+/**
+ * Player class.
+ * 
+ * @author AdrianPlaasLink
+ *
+ */
 public class Player extends PlayerAbstract implements Person {
 
 	/**

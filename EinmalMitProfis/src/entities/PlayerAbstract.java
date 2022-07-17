@@ -27,7 +27,6 @@ public abstract class PlayerAbstract implements Person {
 	 */
 	@Override
 	public int getYSpeed() {
-
 		return (int) yspeed;
 	}
 
@@ -36,7 +35,6 @@ public abstract class PlayerAbstract implements Person {
 	 */
 	@Override
 	public int getXCoord() {
-
 		return xcoord;
 	}
 
