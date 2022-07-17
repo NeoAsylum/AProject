@@ -29,7 +29,6 @@ public class BoulderRain {
       }
 
     }
-    boulderSpawning();
     return index;
   }
 
@@ -41,11 +40,11 @@ public class BoulderRain {
       }
     }
     for (Integer i : toDelete) {
-      boulders.remove(i);
+      boulders.remove(Integer.valueOf(i));
     }
   }
 
-  private void boulderSpawning() {
+  public void boulderSpawning() {
     intervallCounter++;
     if (intervallCounter >= boulderIntervall) {
       intervallCounter = 0;

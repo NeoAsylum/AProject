@@ -5,9 +5,9 @@ import java.awt.geom.Rectangle2D;
 public abstract class PlayerAbstract extends MovingObjectAbstract implements MovingObject {
 	boolean jumped = true;
 	boolean standing;
+	Rectangle2D feet;
 
 	/**
-<<<<<<< HEAD
 	 * Getter for x-speed.
 	 */
 	@Override
@@ -42,8 +42,6 @@ public abstract class PlayerAbstract extends MovingObjectAbstract implements Mov
 	}
 
 	/**
-=======
->>>>>>> branch 'master' of https://github.com/NeoAsylum/AProject.git
 	 * Method for moving the player.
 	 */
 	public abstract void move(boolean a, boolean s, boolean d, boolean w);
@@ -54,6 +52,14 @@ public abstract class PlayerAbstract extends MovingObjectAbstract implements Mov
 	public void resetYSpeed() {
 		standing = true;
 		yspeed = 0;
+	}
+	
+	/**
+	 * Getter for feet-rectangle.
+	 * @return Feet rectangle.
+	 */
+	public Rectangle2D getFeet() {
+		return feet;
 	}
 
 }

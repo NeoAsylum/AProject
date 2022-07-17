@@ -22,6 +22,8 @@ public class Player extends PlayerAbstract implements MovingObject {
 		width = 15;
 		height = 30;
 		rectangle = new Rectangle(xcoord, ycoord, width, height);
+		feet = new Rectangle(xcoord,ycoord+height*3/4,width,height);
+
 		standing = false;
 	}
 
@@ -54,7 +56,9 @@ public class Player extends PlayerAbstract implements MovingObject {
 			yspeed += 0.1;
 
 		}
-		rectangle = new Rectangle(xcoord, ycoord, 15, 30);
+		rectangle = new Rectangle(xcoord, ycoord, width, height);
+		feet = new Rectangle(xcoord,ycoord+height*3/4,width,height/4);
+
 		// standing has to be set to true each frame for it to be valid.
 		standing = false;
 	}
