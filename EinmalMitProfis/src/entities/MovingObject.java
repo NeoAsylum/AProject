@@ -6,7 +6,7 @@ package entities;
  * @author AdrianPlaasLink
  *
  */
-public interface Person {
+public interface MovingObject {
 
 	/**
 	 * Getter x-speed.
@@ -36,9 +36,5 @@ public interface Person {
 	 */
 	public int getYCoord();
 
-	/**
-	 * Method to change x and y coordinates.
-	 */
-	public void move(boolean a, boolean s, boolean d, boolean w);
 
 }

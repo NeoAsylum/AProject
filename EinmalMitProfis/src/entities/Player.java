@@ -2,13 +2,14 @@ package entities;
 
 import java.awt.Rectangle;
 
+
 /**
  * Player class.
  * 
  * @author AdrianPlaasLink
  *
  */
-public class Player extends PlayerAbstract implements Person {
+public class Player extends PlayerAbstract implements MovingObject {
 
 	/**
 	 * Standart constructor.
@@ -25,7 +26,7 @@ public class Player extends PlayerAbstract implements Person {
 	}
 
 	/**
-	 * Method moves player based on boolean input.
+	 * Method moves player b ased on boolean input.
 	 */
 	public void move(boolean a, boolean s, boolean d, boolean w) {
 		if (a) {
@@ -54,7 +55,6 @@ public class Player extends PlayerAbstract implements Person {
 
 		}
 		rectangle = new Rectangle(xcoord, ycoord, 15, 30);
-		System.out.println("Xcood: " + xcoord + ", Ycoord" + ycoord);
 		// standing has to be set to true each frame for it to be valid.
 		standing = false;
 	}

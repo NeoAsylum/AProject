@@ -2,9 +2,11 @@ package gui;
 
 import javax.swing.JPanel;
 
+import entities.Boulder;
 import entities.Player;
 import entities.TheFloor;
 import execution.Main;
+import gamelogic.BoulderRain;
 import useful.KeyHandler;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,7 +33,7 @@ public class GamePane extends JPanel implements Runnable {
 	/**
 	 * FPS.
 	 */
-	static final int FPS = 120;
+	static final int FPS = 640;
 	/**
 	 * Player entity.
 	 */
@@ -40,6 +42,11 @@ public class GamePane extends JPanel implements Runnable {
 	 * The floor.
 	 */
 	private TheFloor floor = new TheFloor();
+
+	/**
+	 * An Arraylist of Boulders.
+	 */
+	BoulderRain br = new BoulderRain();
 	int x = 50, y = 50;
 
 	/**
@@ -64,10 +71,25 @@ public class GamePane extends JPanel implements Runnable {
 	}
 
 	public boolean intersection() {
+		boolean intersects = false;
 		if (player.getRectangle().intersects(floor.getRectangle())) {
-			return true;
+			intersects = true;
 		}
-		return false;
+		int closestBoulder = br.findClosestIndex(player.getXCoord() + player.getWidth() / 2,
+				player.getYCoord() + player.getHeight() / 2);
+		br.getBoulders().get(closestBoulder).setColor(Color.pink);
+		if (closestBoulder != -1) {
+			if (br.getBoulders().get(closestBoulder).getRectangle().intersects(player.getRectangle())) {
+				System.out.println("weee");
+				intersects = true;
+			}
+		}
+
+		return intersects;
+	}
+
+	public void cleanupStuff() {
+		br.deleteBoulder();
 	}
 
 	/**
@@ -75,9 +97,11 @@ public class GamePane extends JPanel implements Runnable {
 	 */
 	public void update() {
 		player.move(keyHandler.leftPressed, keyHandler.downPressed, keyHandler.rightPressed, keyHandler.upPressed);
-		if(intersection()) {
-			player.setYCoord((int)floor.getRectangle().getMinY()-player.getHeight());
+		if (intersection()) {
 			player.resetYSpeed();
+		}
+		for (Boulder b : br.getBoulders()) {
+			b.fall();
 		}
 	}
 
@@ -88,9 +112,12 @@ public class GamePane extends JPanel implements Runnable {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(Color.white);
+		for (Boulder b : br.getBoulders()) {
+			g2.setColor(b.getColor());
+			g2.fill(b.getRectangle());
+		}
 		g2.fill(player.getRectangle());
 		g2.fill(floor.getRectangle());
-		g2.fillRect(x, y, 40, 20);
 		g2.dispose();
 	}
 
@@ -109,6 +136,7 @@ public class GamePane extends JPanel implements Runnable {
 		while (gameThread != null) {
 			requestFocus();
 			update();
+			cleanupStuff();
 			repaint();
 			drawCount++;
 			timer += nextDrawTime - System.nanoTime();
