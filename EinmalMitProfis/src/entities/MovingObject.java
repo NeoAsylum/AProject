@@ -13,28 +13,28 @@ public interface MovingObject {
 	 * 
 	 * @return
 	 */
-	public int getXSpeed();
+	public double getXSpeed();
 
 	/**
 	 * Getter y-speed.
 	 * 
 	 * @return
 	 */
-	public int getYSpeed();
+	public double getYSpeed();
 
 	/**
 	 * Getter x-coordinates.
 	 * 
 	 * @return xcoordinates.
 	 */
-	public int getXCoord();
+	public double getXCoord();
 
 	/**
 	 * Getter y-coordinates.
 	 * 
 	 * @return ycoordinates.
 	 */
-	public int getYCoord();
+	public double getYCoord();
 
 
 }

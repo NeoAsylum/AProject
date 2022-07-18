@@ -12,34 +12,34 @@ public abstract class PlayerAbstract extends MovingObjectAbstract implements Mov
    * Getter for x-speed.
    */
   @Override
-  public int getXSpeed() {
+  public double getXSpeed() {
 
-    return (int) xspeed;
+    return xspeed;
   }
 
   /**
    * Getter for y-speed.
    */
   @Override
-  public int getYSpeed() {
-    return (int) yspeed;
+  public double getYSpeed() {
+    return yspeed;
   }
 
   /**
    * Getter for xcoord.
    */
   @Override
-  public int getXCoord() {
-    return (int) xcoord;
+  public double getXCoord() {
+    return xcoord;
   }
 
   /**
    * Getter for ycoord.
    */
   @Override
-  public int getYCoord() {
+  public double getYCoord() {
 
-    return (int) ycoord;
+    return ycoord;
   }
 
   /**

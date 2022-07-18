@@ -10,6 +10,7 @@ import entities.Player;
 import entities.TheFloor;
 import execution.Main;
 import gamelogic.BoulderRain;
+import gamelogic.Interactions;
 import useful.KeyHandler;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -91,8 +92,8 @@ public class GamePane extends JPanel implements Runnable {
         FPS = 0;
       }
     } else {
-      int closestBoulder = br.findClosestIndex(player.getXCoord() + player.getWidth() / 2,
-          player.getYCoord() + player.getHeight() / 2);
+      int closestBoulder = br.findClosestIndex((int) player.getXCoord() + player.getWidth() / 2,
+          (int) player.getYCoord() + player.getHeight() / 2);
       br.getBoulders().get(closestBoulder).setColor(Color.pink);
       if (closestBoulder != -1) {
         Boulder b = br.getBoulders().get(closestBoulder);
@@ -124,11 +125,14 @@ public class GamePane extends JPanel implements Runnable {
   public void update() {
     player.move(keyHandler.leftPressed, keyHandler.downPressed, keyHandler.rightPressed,
         keyHandler.upPressed);
-    keyHandler.upPressed=false;
+    keyHandler.upPressed = false;
     if (isPlayerStillAlive()) {
       intersection();
+      Interactions.inrceaseScore();
     }
-
+    if(Interactions.getScore()>1000) {
+      floor.removeFromScreen();
+    }
     for (Boulder b : br.getBoulders()) {
       b.fall();
     }
@@ -152,8 +156,13 @@ public class GamePane extends JPanel implements Runnable {
     g2.dispose();
   }
 
+  /**
+   * 
+   * @param g2
+   */
   public void drawMenu(Graphics2D g2) {
     g2.setColor(Color.white);
+    g2.drawString("Score: " + Interactions.getScore(), Main.width / 2 - 30, 80);
     if (!isPlayerStillAlive()) {
       g2.drawString("Press r to respawn.", Main.width / 2 - 30, 50);
     }
@@ -201,6 +210,5 @@ public class GamePane extends JPanel implements Runnable {
 
   public Player getPlayer() {
     return player;
-
   }
 }

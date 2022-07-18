@@ -47,7 +47,9 @@ public class Player extends PlayerAbstract implements MovingObject {
     }
     // Speed up player fall cus of physics.
     if (s) {
+      if(yspeed<0) {
       yspeed += 1;
+      }
     }
     // yspeed is added.
     ycoord += yspeed;

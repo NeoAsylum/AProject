@@ -1,6 +1,5 @@
 package entities;
 
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 public abstract class MovingObjectAbstract implements MovingObject {
@@ -52,35 +51,35 @@ public abstract class MovingObjectAbstract implements MovingObject {
    * Getter for x-speed.
    */
   @Override
-  public int getXSpeed() {
+  public double getXSpeed() {
 
-    return (int) xspeed;
+    return xspeed;
   }
 
   /**
    * Getter for y-speed.
    */
   @Override
-  public int getYSpeed() {
+  public double getYSpeed() {
 
-    return (int) yspeed;
+    return yspeed;
   }
 
   /**
    * Getter for xcoord.
    */
   @Override
-  public int getXCoord() {
+  public double getXCoord() {
 
-    return (int) xcoord;
+    return xcoord;
   }
 
   /**
    * Getter for ycoord.
    */
   @Override
-  public int getYCoord() {
+  public double getYCoord() {
 
-    return (int) ycoord;
+    return ycoord;
   }
 }

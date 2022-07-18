@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Rectangle;
 
 import execution.Main;
+import gamelogic.Interactions;
 
 public class Boulder extends MovingObjectAbstract {
   public final static int MAXWIDTH = 50;
@@ -16,6 +17,7 @@ public class Boulder extends MovingObjectAbstract {
     this.ycoord = ycoord;
     this.xspeed = xspeed;
     this.yspeed = yspeed;
+
     width = (int) (MAXWIDTH * widthfactor);
     height = (int) (MAXHEIGHT * heightfactor);
     rectangle = new Rectangle(xcoord, ycoord, width, height);
@@ -31,10 +33,11 @@ public class Boulder extends MovingObjectAbstract {
     xcoord = (int) (Math.random() * (Main.width - width));
     ycoord = 0;
     xspeed = 0;
-    yspeed = 1;
+    double averageYSpeed = 1
+        + (1.0 / ((-Interactions.getScore()) / 10000.0 - 1.0) + 1.0) * 2.0;
+    yspeed = (Math.random() * 0.7 + 0.3) * averageYSpeed;
     rectangle = new Rectangle((int) xcoord, (int) ycoord, width, height);
-    System.out
-        .println("width:" + width + "height:" + height + "xcoord:" + xcoord + "ycoord:" + ycoord);
+   
   }
 
   public void fall() {
@@ -44,14 +47,6 @@ public class Boulder extends MovingObjectAbstract {
 
   public Color getColor() {
     return color;
-  }
-
-  public void increaseFallingRate() {
-    yspeed += 0.01;
-  }
-
-  public void FallingRate() {
-    yspeed -= 0.01;
   }
 
   public void setColor(Color color) {

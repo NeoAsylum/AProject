@@ -3,7 +3,9 @@ package useful;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import entities.TheFloor;
 import execution.Main;
+import gamelogic.Interactions;
 
 /**
  * Class for Key Listener.
@@ -44,6 +46,8 @@ public class KeyHandler implements KeyListener {
       break;
     case KeyEvent.VK_R:
       Main.getEinFrame().getGamePane().getPlayer().respawn();
+      TheFloor.reset();;
+      Interactions.resetScore();
       rpressed = true;
     }
   }

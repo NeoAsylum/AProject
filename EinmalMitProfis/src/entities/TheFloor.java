@@ -17,7 +17,7 @@ public class TheFloor {
   /**
    * The shape of the floor.
    */
-  private Rectangle2D rectangle;
+  private static Rectangle2D rectangle;
 
   /**
    * Standart constructor.
@@ -34,5 +34,13 @@ public class TheFloor {
    */
   public Rectangle2D getRectangle() {
     return rectangle;
+  }
+
+  public static void reset() {
+    rectangle = new Rectangle(Main.width / 2 - 50, Main.height - 100, 100, 5);
+  }
+
+  public static void removeFromScreen() {
+    rectangle = new Rectangle((int) Short.MAX_VALUE, Main.height - 100, 5, 5);
   }
 }
