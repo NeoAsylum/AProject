@@ -4,8 +4,8 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 public abstract class MovingObjectAbstract implements MovingObject {
-  int xcoord;
-  int ycoord;
+  double xcoord;
+  double ycoord;
   double xspeed;
   double yspeed;
   int height;
@@ -72,7 +72,7 @@ public abstract class MovingObjectAbstract implements MovingObject {
   @Override
   public int getXCoord() {
 
-    return xcoord;
+    return (int) xcoord;
   }
 
   /**
@@ -81,6 +81,6 @@ public abstract class MovingObjectAbstract implements MovingObject {
   @Override
   public int getYCoord() {
 
-    return ycoord;
+    return (int) ycoord;
   }
 }

@@ -6,6 +6,7 @@ public abstract class PlayerAbstract extends MovingObjectAbstract implements Mov
   boolean jumped = true;
   boolean standing;
   Rectangle2D feet;
+  double xMaxSpeed = 1.8;
 
   /**
    * Getter for x-speed.
@@ -29,7 +30,7 @@ public abstract class PlayerAbstract extends MovingObjectAbstract implements Mov
    */
   @Override
   public int getXCoord() {
-    return xcoord;
+    return (int) xcoord;
   }
 
   /**
@@ -38,7 +39,7 @@ public abstract class PlayerAbstract extends MovingObjectAbstract implements Mov
   @Override
   public int getYCoord() {
 
-    return ycoord;
+    return (int) ycoord;
   }
 
   /**

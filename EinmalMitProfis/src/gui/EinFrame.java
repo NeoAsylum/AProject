@@ -18,6 +18,7 @@ public class EinFrame extends JFrame {
    * The backup Pane.
    */
   public Dimension dimension = new Dimension(Main.width, Main.height);
+  GamePane panel;
 
   /**
    * Create the frame.
@@ -28,11 +29,15 @@ public class EinFrame extends JFrame {
     this.setPreferredSize(dimension);
     setResizable(false);
     setTitle("Titel");
-    JPanel panel = new GamePane(dimension);
+    panel = new GamePane(dimension);
     pack();
     setLocationRelativeTo(null);
     setVisible(true);
     add(panel);
     panel.requestFocus();
+  }
+
+  public GamePane getGamePane() {
+    return panel;
   }
 }

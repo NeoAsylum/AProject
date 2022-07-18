@@ -74,4 +74,8 @@ public class Main {
   public static Logger getLogger() {
     return log;
   }
+  
+  public static EinFrame getEinFrame() {
+    return frame;
+  }
 }

@@ -3,16 +3,19 @@ package useful;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import execution.Main;
+
 /**
  * Class for Key Listener.
+ * 
  * @author AdrianPlaasLink
  *
  */
 public class KeyHandler implements KeyListener {
-	/**
-	 * Booleans for directions w,a,s,d.
-	 */
-  public boolean upPressed, downPressed, leftPressed, rightPressed;
+  /**
+   * Booleans for directions w,a,s,d.
+   */
+  public boolean upPressed, downPressed, leftPressed, rightPressed, rpressed;
 
   @Override
   public void keyTyped(KeyEvent e) {
@@ -39,6 +42,9 @@ public class KeyHandler implements KeyListener {
     case KeyEvent.VK_D:
       rightPressed = true;
       break;
+    case KeyEvent.VK_R:
+      Main.getEinFrame().getGamePane().getPlayer().respawn();
+      rpressed = true;
     }
   }
 

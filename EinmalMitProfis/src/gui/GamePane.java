@@ -1,5 +1,8 @@
 package gui;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import entities.Boulder;
@@ -12,6 +15,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -48,7 +54,6 @@ public class GamePane extends JPanel implements Runnable {
    * An Arraylist of Boulders.
    */
   BoulderRain br = new BoulderRain();
-  int x = 50, y = 50;
 
   /**
    * Create the panel.
@@ -71,7 +76,12 @@ public class GamePane extends JPanel implements Runnable {
     gameThread.start();
   }
 
+  public boolean isPlayerStillAlive() {
+    return player.getYCoord() < Main.height;
+  }
+
   public boolean intersection() {
+
     boolean intersects = false;
     if (player.getRectangle().intersects(floor.getRectangle())) {
       if (player.getFeet().intersects(floor.getRectangle())) {
@@ -92,10 +102,10 @@ public class GamePane extends JPanel implements Runnable {
             player.resetYSpeed(b.getYSpeed());
             intersects = true;
           } else {
-            //insert death here
+            // insert death here
           }
-        }else {
-            player.setPlayerStanding(false);
+        } else {
+          player.setPlayerStanding(false);
         }
       }
     }
@@ -114,7 +124,9 @@ public class GamePane extends JPanel implements Runnable {
   public void update() {
     player.move(keyHandler.leftPressed, keyHandler.downPressed, keyHandler.rightPressed,
         keyHandler.upPressed);
-    intersection();
+    if (isPlayerStillAlive()) {
+      intersection();
+    }
 
     for (Boulder b : br.getBoulders()) {
       b.fall();
@@ -133,9 +145,17 @@ public class GamePane extends JPanel implements Runnable {
       g2.setColor(b.getColor());
       g2.fill(b.getRectangle());
     }
+    drawMenu(g2);
     g2.fill(player.getRectangle());
     g2.fill(floor.getRectangle());
     g2.dispose();
+  }
+
+  public void drawMenu(Graphics2D g2) {
+    g2.setColor(Color.white);
+    if (!isPlayerStillAlive()) {
+      g2.drawString("Press r to respawn.", Main.width / 2 - 30, 50);
+    }
   }
 
   /**
@@ -176,5 +196,10 @@ public class GamePane extends JPanel implements Runnable {
         timer = 0;
       }
     }
+  }
+
+  public Player getPlayer() {
+    return player;
+
   }
 }
