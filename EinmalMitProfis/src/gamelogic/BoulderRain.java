@@ -8,7 +8,7 @@ import execution.Main;
 
 public class BoulderRain {
   private ArrayList<Boulder> boulders;
-  private int boulderIntervall = 60;
+  private int boulderIntervall = 30;
   private int intervallCounter = 0;
 
   public BoulderRain() {

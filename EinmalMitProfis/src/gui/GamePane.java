@@ -124,6 +124,7 @@ public class GamePane extends JPanel implements Runnable {
   public void update() {
     player.move(keyHandler.leftPressed, keyHandler.downPressed, keyHandler.rightPressed,
         keyHandler.upPressed);
+    keyHandler.upPressed=false;
     if (isPlayerStillAlive()) {
       intersection();
     }
