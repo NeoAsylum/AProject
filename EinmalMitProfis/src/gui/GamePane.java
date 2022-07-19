@@ -1,8 +1,5 @@
 package gui;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import entities.Boulder;
@@ -16,9 +13,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -131,7 +125,7 @@ public class GamePane extends JPanel implements Runnable {
       Interactions.inrceaseScore();
     }
     if(Interactions.getScore()>1000) {
-      floor.removeFromScreen();
+      TheFloor.removeFromScreen();
     }
     for (Boulder b : br.getBoulders()) {
       b.fall();
@@ -146,9 +140,9 @@ public class GamePane extends JPanel implements Runnable {
     Graphics2D g2 = (Graphics2D) g;
     g2.setColor(Color.white);
     ArrayList<Boulder> temp = br.getBoulders();
-    for (Boulder b : temp) {
-      g2.setColor(b.getColor());
-      g2.fill(b.getRectangle());
+    for (int i=0; i<temp.size(); i++) {
+      g2.setColor(temp.get(i).getColor());
+      g2.fill(temp.get(i).getRectangle());
     }
     drawMenu(g2);
     g2.fill(player.getRectangle());

@@ -1,10 +1,8 @@
 package gui;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import execution.Main;
-import useful.KeyHandler;
 import java.awt.Dimension;
 
 /**

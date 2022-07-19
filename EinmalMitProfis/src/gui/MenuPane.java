@@ -15,7 +15,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import execution.Main;
 
 @SuppressWarnings("serial")
 public class MenuPane extends JPanel {
@@ -42,7 +41,6 @@ public class MenuPane extends JPanel {
     // Buttons
     JPanel panel = new JPanel();
     panel.setFont(myFont);
-
     add(panel, BorderLayout.CENTER);
     optionsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
